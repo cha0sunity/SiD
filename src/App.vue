@@ -34,7 +34,7 @@
             </v-list>
           </v-navigation-drawer>
  <!-- main area -->
-          <v-main style="height: 350px">
+          <v-main style="height: 1000px">
             <Drawer v-show="monsterList" :placeholderMonsters=placeholderMonsters @buildCards="addToCardsToBuild" @checkBoxesSelected="addToCardsToBuild" />
             <div v-show="monsterArea" class="monsterArea">
               <div v-for="card in cardsToBuild" :key="card">
@@ -169,6 +169,8 @@ body {
 h2 {
   font-family: 'IM Fell English SC', serif;
 }
+
+
 </style>
 
 

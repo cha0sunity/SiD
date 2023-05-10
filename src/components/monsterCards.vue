@@ -9,8 +9,9 @@
 
       </v-card-item>
 
-      <v-card-text>
+      <v-card-text >
         <h3 class="des"> {{ monster.description }}</h3>
+        <div class="cardB">
             <div class="statsRow">
                 <div class="stats">
                   <div class="stat">
@@ -130,6 +131,7 @@
               </div>
             </div>
         </div>
+        </div>
         </v-card-text>
       </div>
       
@@ -223,6 +225,7 @@ export default {
   justify-content: center;
   padding-bottom: 5px;
   border-bottom: 2px solid gray;
+
 }
 
 .abilityRow {
@@ -294,4 +297,11 @@ export default {
   
 }
 
+.cardB {
+  font-size: large;
+}
+
+h2 {
+  font-size: xx-large;
+}
 </style>
