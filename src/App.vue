@@ -27,7 +27,7 @@
 
             <v-list density="compact" nav>
               <v-list-item prepend-icon="mdi-home-city" title="Monster List" value="Monster List" @click="showMonsterList"></v-list-item>
-              <v-list-item prepend-icon="mdi-account" title="Monster Area" value="Monster Area" @click="showMonsterArea"></v-list-item>
+              <v-list-item prepend-icon="mdi-account" title="Monster Cards" value="Monster Cards" @click="showMonsterArea"></v-list-item>
               <v-list-item prepend-icon="mdi-account-group-outline" title="Create Monster" value="Create Monster" @click="showCreate"></v-list-item>
               <v-list-item prepend-icon="mdi-account-group-outline" title="Edit Monster List" value="Edit Monster List" ></v-list-item>
               <v-list-item prepend-icon="mdi-account-group-outline" title="Settings" value="Settings" ></v-list-item>
@@ -35,7 +35,7 @@
           </v-navigation-drawer>
  <!-- main area -->
           <v-main style="height: 1000px">
-            <Drawer ref="drawer" v-show="monsterList" :placeholderMonsters=placeholderMonsters @buildCards="addToCardsToBuild" @checkBoxesSelected="addToCardsToBuild" />
+            <Drawer ref="drawer" v-show="monsterList" @buildCards="addToCardsToBuild" @checkBoxesSelected="addToCardsToBuild" />
             <div v-show="monsterArea" class="monsterArea">
               <div v-for="card in cardsToBuild" :key="card">
                 <MonsterCards :monster="card" />
@@ -76,56 +76,56 @@ export default {
           { title: 'Users', icon: 'mdi-account-group-outline' },
         ],
         rail: true,
-        placeholderMonsters: [
-          {
-            enemyName: "goblin",
-            description: "A short, hairless humanoid with green skin and pointy ears.",
-            AC: 11,
-            HP: 15,
-            ATK:{
-                weapon: "club",
-                attackBonus: 0,
-                numberOfAttacks: 2,
-                range: "close",
-                numberOfDamageDice: 1,
-                damageDiceSize: 4
-              },
-            MV: "near",
-            Strength: 0,
-            Dextrity: 1,
-            Constitution: 1,
-            Intelligence: -1,
-            Wisdom: -1,
-            Charism: -2,
-            Alignment: "chaotic",
-            LV: 1,
-            Special: "Keen Senses. Can't be surprised."
-      },
-      {
-        enemyName: "kobold",
-            description: "A short, lizard thing.",
-            AC: 10,
-            HP: 12,
-            ATK:{
-                weapon: "teeth",
-                attackBonus: 1,
-                numberOfAttacks: 6,
-                range: "close",
-                numberOfDamageDice: 10,
-                damageDiceSize: 10
-              },
-            MV: "near",
-            Strength: 1,
-            Dextrity: 2,
-            Constitution: -1,
-            Intelligence: -2,
-            Wisdom: 8,
-            Charism: -9,
-            Alignment: "chaotic",
-            LV: 1,
-            Special: "Bites alot"
-      }
-    ],
+    //     placeholderMonsters: [
+    //       {
+    //         enemyName: "goblin",
+    //         description: "A short, hairless humanoid with green skin and pointy ears.",
+    //         AC: 11,
+    //         HP: 15,
+    //         ATK:{
+    //             weapon: "club",
+    //             attackBonus: 0,
+    //             numberOfAttacks: 2,
+    //             range: "close",
+    //             numberOfDamageDice: 1,
+    //             damageDiceSize: 4
+    //           },
+    //         MV: "near",
+    //         Strength: 0,
+    //         Dextrity: 1,
+    //         Constitution: 1,
+    //         Intelligence: -1,
+    //         Wisdom: -1,
+    //         Charism: -2,
+    //         Alignment: "chaotic",
+    //         LV: 1,
+    //         Special: "Keen Senses. Can't be surprised."
+    //   },
+    //   {
+    //     enemyName: "kobold",
+    //         description: "A short, lizard thing.",
+    //         AC: 10,
+    //         HP: 12,
+    //         ATK:{
+    //             weapon: "teeth",
+    //             attackBonus: 1,
+    //             numberOfAttacks: 6,
+    //             range: "close",
+    //             numberOfDamageDice: 10,
+    //             damageDiceSize: 10
+    //           },
+    //         MV: "near",
+    //         Strength: 1,
+    //         Dextrity: 2,
+    //         Constitution: -1,
+    //         Intelligence: -2,
+    //         Wisdom: 8,
+    //         Charism: -9,
+    //         Alignment: "chaotic",
+    //         LV: 1,
+    //         Special: "Bites alot"
+    //   }
+    // ],
     cardsToBuild: []
     }
   },
@@ -148,7 +148,7 @@ export default {
     this.monsterArea = false
     this.createArea = true
   },
-  updateMonsterList() {
+    updateMonsterList() {
     console.log('hi')
     this.$refs.drawer.fetchMonsters()
   }

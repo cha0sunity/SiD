@@ -4,7 +4,7 @@
       <v-card-item>
         
         <v-card-title>
-          <h2 class='mCardTitle'>{{ monster.enemyName }}</h2>
+          <h2 class='mCardTitle'>{{ monster.monsterName }}</h2>
         </v-card-title>
 
       </v-card-item>
@@ -18,7 +18,7 @@
                     AC
                   </div> 
                   <div class="stat">
-                    {{ monster.AC }}
+                    {{ monster.ac }}
                   </div> 
                 </div>
                 <div class="stats">
@@ -26,7 +26,7 @@
                     HP
                   </div>
                   <div class="stat">
-                    {{ monster.HP }}
+                    {{ monster.hp }}
                   </div>
                 </div>
                 <div class="stats">
@@ -34,7 +34,8 @@
                     MV
                   </div>
                   <div class="stat">
-                    {{ monster.MV }}
+                    {{ monster.Mv.type }} {{ monster.Mv.distance }}
+                    
                   </div>
                 </div>
                 <div class="stats">
@@ -42,7 +43,7 @@
                     LV
                   </div>
                   <div class="stat">
-                    {{ monster.LV }}
+                    {{ monster.lvl }}
                   </div>
                 </div>
                 <div class="stats">
@@ -50,67 +51,74 @@
                     AL
                   </div>
                   <div class="stat">
-                    {{ monster.Alignment }}
+                    {{ monster.alignment }}
                   </div>
                 </div>
               </div>
 
             <div class="abilityRow">
-                <div class="abilities" @click="twentyRoll(1, 20, monster.Strength)">  
+                <div class="abilities" @click="twentyRoll(1, 20, monster.Str)">  
                   <div class="ability">
                     S
                   </div> 
                   <div class="ability">
-                    {{ monster.Strength }}
+                    {{ monster.Str }}
                   </div> 
                 </div>
-                <div class="abilities" @click="twentyRoll(1, 20, monster.Dextrity)"> 
+                <div class="abilities" @click="twentyRoll(1, 20, monster.Dex)"> 
                   <div class="ability">
                     D
                   </div>
                   <div class="ability">
-                    {{ monster.Dextrity }}
+                    {{ monster.Dex }}
                   </div>
                 </div>
-                <div class="abilities" @click="twentyRoll(1, 20, monster.Constitution)">
+                <div class="abilities" @click="twentyRoll(1, 20, monster.Con)">
                   <div class="ability">
                     C
                   </div>
                   <div class="ability">
-                    {{ monster.Constitution }}
+                    {{ monster.Con }}
                   </div>
                 </div>
-                <div class="abilities" @click="twentyRoll(1, 20, monster.Intelligence)">
+                <div class="abilities" @click="twentyRoll(1, 20, monster.Int)">
                   <div class="ability">
                     I
                   </div>
                   <div class="ability">
-                    {{ monster.Intelligence }}
+                    {{ monster.Int }}
                   </div>
                 </div>
-                <div class="abilities" @click="twentyRoll(1, 20, monster.Wisdom)">
+                <div class="abilities" @click="twentyRoll(1, 20, monster.Wis)">
                   <div class="ability">
                     W
                   </div>
                   <div class="ability">
-                    {{ monster.Wisdom }}
+                    {{ monster.Wis }}
                   </div>
                 </div>
-                <div class="abilities" @click="twentyRoll(1, 20, monster.Charism)">
+                <div class="abilities" @click="twentyRoll(1, 20, monster.Cha)">
                   <div class="ability">
                     Ch
                   </div>
                   <div class="ability">
-                    {{ monster.Charism }}
+                    {{ monster.Cha }}
                   </div>
                 </div>
-              </div>   
-          <div class="attackRow">
-              <div class="attack">
-               ATK {{ monster.ATK.numberOfAttacks }}  <span class="atk" @click="twentyRoll(1, 20, monster.ATK.attackBonus)">{{ monster.ATK.weapon }}  + {{ monster.ATK.attackBonus }}</span> <span class="atk" @click="damageRoll(monster.ATK.numberOfDamageDice, monster.ATK.damageDiceSize, 0)">({{ monster.ATK.numberOfDamageDice }}d{{ monster.ATK.damageDiceSize }})</span> 
+              </div>
+
+          <div class="attackRow" v-for="attack in monster.ATK" :key="attack">
+              <div class="attack" v-if="attack.weapon">
+                <span class="atk" @click="twentyRoll(1, 20, attack.atkBonus)">ATK {{ attack.numberOfAttacks }}  {{ attack.weapon }}  + {{ attack.atkBonus }}</span> <span class="atk" @click="damageRoll(attack.numOfDamageDice, attack.sizeOfDamageDice, 0)">({{ attack.numOfDamageDice }}d{{ attack.sizeOfDamageDice }})</span> 
               </div>
             </div>
-          <p>{{ monster.Special }}</p>
+
+          <div class="attackRow" v-for="special in monster.Special" :key="special">
+              <div class="attack" v-if="special.specialName" >
+               <strong>{{ special.specialName }}</strong> - {{ special.specialDescription }}   
+              </div>
+            </div>
+
           <div class="rollResults">
             <div class="showRolls">
               <div>
@@ -154,31 +162,28 @@ export default {
     props: ['monster'],
     methods: {
       diceRoller(numberOfDice, sidesOfDice, mod) {
-      
-            if(numberOfDice > 1) {
+
+            if(Number(numberOfDice) > 1) {
               let total = 0;
               let roll = null;
 
-              for(let i = 1; i <= numberOfDice ; i++) {
-                roll = Math.floor(Math.random() * sidesOfDice) + 1
-                total = total + roll
+              for(let i = 1; i <= Number(numberOfDice) ; i++) {
+                roll = Math.floor(Math.random() * Number(sidesOfDice)) + 1
+                total = Number(total) + Number(roll)
               }
 
               return total
             }
-
-           return Math.floor(Math.random() * sidesOfDice) + (1 + mod)
+          let preMod = Math.floor(Math.random() * Number(sidesOfDice)) + 1
+          let postMod = Number(preMod) + Number(mod)
+           return postMod
         },
           twentyRoll(numberOfDice, sidesOfDice, mod) {
-            
             let twentyRollNum = this.diceRoller(numberOfDice, sidesOfDice, mod)
-            console.log(twentyRollNum)
             this.twentyRollResult = twentyRollNum
           },
           damageRoll(numberOfDice, sidesOfDice, mod) {
-            
             let damageRollNum = this.diceRoller(numberOfDice, sidesOfDice, mod)
-            console.log(damageRollNum)
             this.damageRollResult = damageRollNum
           }
     }
@@ -293,7 +298,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0px 40px 0px 40px;
+  margin: 0px 35px 0px 35px;
   
 }
 

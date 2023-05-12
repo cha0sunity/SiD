@@ -15,18 +15,13 @@ export default {
         }
     },
     props: ['rollData'],
-    watch: { // figure out why this won't undate
-        'rollData.mod'(newVal) {
-            this.diceRoller(newVal)
-        }
-    },
     methods: {
         diceRoller(mod) {
            this.rollOne = Math.floor(Math.random() * 21 + mod)
         }
     },
     updated() {
-        console.log(this.rollData.mod)
+        console.log(rollData)
         
     }
 }

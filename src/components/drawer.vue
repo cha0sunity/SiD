@@ -5,8 +5,8 @@
         <h2>Here Be Monsters</h2>
         <div class="list" v-for="monster in monsterList" :key="monster" item-style="display: flex; align=center">
             <input type="checkbox" :value="monster" v-model="isChecked" @change="emitChecked">
-              {{ monster }}
-      </div>
+              {{ monster.monsterName }}
+        </div>
     </div>
   </div>
 </template>
@@ -18,8 +18,6 @@ export default {
     // Fetches the monsters from local storage
     this.fetchMonsters()
   },
-  // Props that can be passed to this component from its parent
-  props: ['placeholderMonsters'],
   // Data properties used by the component
   data() {
     return {
@@ -35,18 +33,15 @@ export default {
     emitChecked() {
       this.$emit('checkBoxesSelected', this.isChecked)
     },
-    // Fetches monsters from local storage and updates the monsterList
+
     fetchMonsters() {
-      // Clear the monsterList
       this.monsterList = []
-      // Iterate over the keys in local storage
+
       Object.keys(localStorage).forEach((key) => {
-        // If the key starts with "SiD-", it is a monster object
         if(key.startsWith("SiD-")){
-          // Parse the monster object from local storage
-          const monsterName = JSON.parse(localStorage.getItem(key))
-          // Add the monster name to the monsterList
-          this.monsterList.push(monsterName.monsterName)
+          const monster = JSON.parse(localStorage.getItem(key))
+          // const monster = JSON.parse(localStorage.getItem(key))
+          this.monsterList.push(monster)
         }
       })
     }

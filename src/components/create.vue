@@ -9,6 +9,18 @@
               :items="['Law','Neutral','Chaos']"
               v-model="this.alignment"
             ></v-select>
+        <v-select
+              label="Movement Type"
+              class="medInputStyle"
+              :items="['Walk','Fly','Swim','Burrow','Float','Teleport']"
+              v-model="this.mvType"
+            ></v-select>
+        <v-select
+              label="Movement Range"
+              class="medInputStyle"
+              :items="['Close','Near','Near x2','Far','I go Where I want']"
+              v-model="this.mvDistance"
+            ></v-select>
           
         <div class="inputColRow">
 
@@ -105,7 +117,7 @@
           <div class="inputColRow">
 
           <div class="multiForm">
-              <v-text-field label="Weapon" class="medInputStyle"></v-text-field>
+              <v-text-field label="Weapon" class="medInputStyle" v-model="this.weaponOne"></v-text-field>
               <v-text-field
                   label="Attack Bonus"
                   type="number"   
@@ -113,6 +125,7 @@
                   min="-5"
                   ref="input"
                   class="medInputStyle"
+                  v-model="this.atkBonusOne"
               ></v-text-field>
               <v-text-field
                   label="Number of Attacks"
@@ -130,7 +143,7 @@
                   min="1"
                   ref="input"
                   class="medInputStyle"
-
+                  v-model="this.numOfDamageDiceOne"
               ></v-text-field>
               <v-text-field
                   label="Size of Damage Dice"
@@ -140,12 +153,12 @@
                   max="12"
                   ref="input"
                   class="medInputStyle"
-
+                  v-model="this.sizeOfDamageDiceOne"
               ></v-text-field>
               </div>
 
              <div class="multiForm" v-if="secondAttack">
-              <v-text-field label="Weapon" class="medInputStyle"></v-text-field>
+              <v-text-field label="Weapon" class="medInputStyle" v-model="this.weaponTwo"></v-text-field>
               <v-text-field
                   label="Attack Bonus"
                   type="number"   
@@ -153,6 +166,7 @@
                   min="-5"
                   ref="input"
                   class="medInputStyle"
+                  v-model="this.atkBonusTwo"
               ></v-text-field>
               <v-text-field
                   label="Number of Attacks"
@@ -170,7 +184,7 @@
             min="1"
             ref="input"
             class="medInputStyle"
-
+            v-model="this.numOfDamageDiceTwo"
         ></v-text-field>
               
               <v-text-field
@@ -181,19 +195,19 @@
                   max="12"
                   ref="input"
                   class="medInputStyle"
-
+                  v-model="this.sizeOfDamageDiceTwo"
               ></v-text-field>
                   </div>
                 </div>
               </div>
               <div>
                     <v-btn prepend-icon="mdi-plus" @click="toggleSpecial">Special</v-btn>
-                    <v-text-field label="Special Name" class="largeInputStyle"></v-text-field>
-                    <v-text-field label="Special Description" class="largeInputStyle"></v-text-field>
+                    <v-text-field label="Special Name" class="largeInputStyle" v-model="specialNameOne"></v-text-field>
+                    <v-text-field label="Special Description" class="largeInputStyle" v-model="specialDescriptionOne"></v-text-field>
                   </div>
               <div v-if="secondSpecial">
-                    <v-text-field label="Special Name" class="largeInputStyle"></v-text-field>
-                    <v-text-field label="Special Description" class="largeInputStyle"></v-text-field>
+                    <v-text-field label="Special Name" class="largeInputStyle" v-model="specialNameTwo"></v-text-field>
+                    <v-text-field label="Special Description" class="largeInputStyle" v-model="specialDescriptionTwo"></v-text-field>
                   </div>
             </div>
             <button @click="saveMonster">Save</button>
@@ -224,14 +238,18 @@ export default {
       atkBonusOne: null,
       numOfAttacksOne: null,
       numOfDamageDiceOne: null,
-      sizeofDamageDiceOne: null,
+      sizeOfDamageDiceOne: null,
       weaponTwo: null,
       atkBonusTwo: null,
       numOfAttacksTwo: null,
       numOfDamageDiceTwo: null,
-      sizeofDamageDiceTwo: null,
+      sizeOfDamageDiceTwo: null,
       specialNameOne: null,
-      specialNameTwo: null
+      specialDescriptionOne: null,
+      specialNameTwo: null,
+      specialDescriptionTwo: null,
+      mvType: null,
+      mvDistance: null
     }
   },
   methods: {
@@ -247,9 +265,12 @@ export default {
       monsterName: this.monsterName,
       description: this.description,
       alignment: this.alignment,
-      numberOfAttack: this.numberOfAttack,
       ac: this.ac,
       hp: this.hp,
+      Mv:{
+        type: this.mvType,
+        distance: this.mvDistance
+      },
       lvl: this.lvl,
       Str: this.Str,
       Dex: this.Dex,
@@ -257,16 +278,29 @@ export default {
       Int: this.Int,
       Wis: this.Wis,
       Cha: this.Cha,
-      weaponOne: this.weaponOne,
-      atkBonusOne: this.atkBonusOne,
-      numOfDamageDiceOne: this.numOfDamageDiceOne,
-      sizeofDamageDiceOne: this.sizeofDamageDiceOne,
-      weaponTwo: this.weaponTwo,
-      atkBonusTwo: this.atkBonusTwo,
-      numOfDamageDiceTwo: this.numOfDamageDiceTwo,
-      sizeofDamageDiceTwo: this.sizeofDamageDiceTwo,
-      specialNameOne: this.specialNameOne,
-      specialNameTwo: this.specialNameTwo
+      ATK: [{
+        weapon: this.weaponOne,
+        numberOfAttacks: this.numOfAttacksOne,
+        atkBonus: this.atkBonusOne,
+        numOfDamageDice: this.numOfDamageDiceOne,
+        sizeOfDamageDice: this.sizeOfDamageDiceOne,
+      },
+        {
+          weapon: this.weaponTwo,
+          numberOfAttacks: this.numOfAttacksTwo,
+          atkBonus: this.atkBonusTwo,
+          numOfDamageDice: this.numOfDamageDiceTwo,
+          sizeofDamageDice: this.sizeOfDamageDiceTwo,
+        }
+      ],
+      Special:[{
+        specialName: this.specialNameOne,
+        specialDescription: this.specialDescriptionOne
+      },
+      {
+        specialName: this.specialNameTwo,
+        specialDescription: this.specialDescriptionTwo
+      }]      
     }
     keyName = "SiD-" + this.monsterName;
     localStorage.setItem(keyName, JSON.stringify(monster));
@@ -287,11 +321,11 @@ export default {
     this.weaponOne = null
     this.atkBonusOne = null
     this.numOfDamageDiceOne = null
-    this.sizeofDamageDiceOne = null
+    this.sizeOfDamageDiceOne = null
     this.weaponTwo = null
     this.atkBonusTwo = null
     this.numOfDamageDiceTwo = null
-    this.sizeofDamageDiceTwo = null
+    this.sizeOfDamageDiceTwo = null
     this.specialNameOne = null
     this.specialNameTwo = null
 
