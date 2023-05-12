@@ -9,15 +9,7 @@
               :items="['Law','Neutral','Chaos']"
               v-model="this.alignment"
             ></v-select>
-            <v-text-field
-                  label="Number of Attacks"
-                  type="number"   
-                  step="any"
-                  min="1"
-                  ref="input"
-                  class="medInputStyle"
-                  v-model="this.numberOfAttack"
-              ></v-text-field>
+          
         <div class="inputColRow">
 
             <v-text-field
@@ -105,8 +97,8 @@
           ></v-text-field>
         
           </div>
-
         </div>
+
         <div class="inputCol">
           <div>
             <v-btn prepend-icon="mdi-plus" @click="toggleAttack">Attack</v-btn>
@@ -121,7 +113,15 @@
                   min="-5"
                   ref="input"
                   class="medInputStyle"
-
+              ></v-text-field>
+              <v-text-field
+                  label="Number of Attacks"
+                  type="number"   
+                  step="any"
+                  min="1"
+                  ref="input"
+                  class="medInputStyle"
+                  v-model="this.numOfAttacksOne"
               ></v-text-field>
               <v-text-field
                   label="Number of Damage Dice"
@@ -153,7 +153,15 @@
                   min="-5"
                   ref="input"
                   class="medInputStyle"
-
+              ></v-text-field>
+              <v-text-field
+                  label="Number of Attacks"
+                  type="number"   
+                  step="any"
+                  min="1"
+                  ref="input"
+                  class="medInputStyle"
+                  v-model="this.numOfAttacksTwo"
               ></v-text-field>
               <v-text-field
             label="Number of Damage Dice"
@@ -203,7 +211,6 @@ export default {
       monsterName: null,
       description: null,
       alignment: null,
-      numberOfAttack: null,
       ac: null,
       hp: null,
       lvl: null,
@@ -215,10 +222,12 @@ export default {
       Cha: null,
       weaponOne: null,
       atkBonusOne: null,
+      numOfAttacksOne: null,
       numOfDamageDiceOne: null,
       sizeofDamageDiceOne: null,
       weaponTwo: null,
       atkBonusTwo: null,
+      numOfAttacksTwo: null,
       numOfDamageDiceTwo: null,
       sizeofDamageDiceTwo: null,
       specialNameOne: null,
@@ -233,6 +242,7 @@ export default {
       this.secondSpecial = !this.secondSpecial
     },
     saveMonster() {
+      let keyName;
       const monster = {
       monsterName: this.monsterName,
       description: this.description,
@@ -258,7 +268,8 @@ export default {
       specialNameOne: this.specialNameOne,
       specialNameTwo: this.specialNameTwo
     }
-    localStorage.setItem(this.monsterName, JSON.stringify(monster));
+    keyName = "SiD-" + this.monsterName;
+    localStorage.setItem(keyName, JSON.stringify(monster));
 
     this.monsterName = null
     this.description = null
@@ -284,6 +295,10 @@ export default {
     this.specialNameOne = null
     this.specialNameTwo = null
 
+    this.emitUpdate()
+  },
+  emitUpdate() {
+    this.$emit('monsterAdded')
   }
 }
 }
@@ -292,12 +307,14 @@ export default {
 <style>
 .formArea {
   display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
-.multiForm {
+/* .multiForm {
   display: flex;
   flex-direction: column;
   padding: 2px 2px 2px
-}
+} */
 .multiForm .medInputStyle {
   margin-right: 5px;
 }

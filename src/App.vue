@@ -35,13 +35,13 @@
           </v-navigation-drawer>
  <!-- main area -->
           <v-main style="height: 1000px">
-            <Drawer v-show="monsterList" :placeholderMonsters=placeholderMonsters @buildCards="addToCardsToBuild" @checkBoxesSelected="addToCardsToBuild" />
+            <Drawer ref="drawer" v-show="monsterList" :placeholderMonsters=placeholderMonsters @buildCards="addToCardsToBuild" @checkBoxesSelected="addToCardsToBuild" />
             <div v-show="monsterArea" class="monsterArea">
               <div v-for="card in cardsToBuild" :key="card">
                 <MonsterCards :monster="card" />
               </div>
             </div>
-            <Create v-show="createArea"/>
+            <Create v-show="createArea" @monsterAdded="updateMonsterList()"/>
           </v-main>
 <!-- End main area -->
         </v-layout>
@@ -147,6 +147,10 @@ export default {
     this.monsterList = false
     this.monsterArea = false
     this.createArea = true
+  },
+  updateMonsterList() {
+    console.log('hi')
+    this.$refs.drawer.fetchMonsters()
   }
   },
 
