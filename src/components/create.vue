@@ -18,7 +18,7 @@
         <v-select
               label="Movement Range"
               class="medInputStyle"
-              :items="['Close','Near','Near x2','Far','I go Where I want']"
+              :items="['Close','Near','Near x2','Far']"
               v-model="this.mvDistance"
             ></v-select>
           
@@ -328,7 +328,12 @@ export default {
     this.sizeOfDamageDiceTwo = null
     this.specialNameOne = null
     this.specialNameTwo = null
-
+    this.mvType = null
+    this.mvDistance = null
+    this.numOfAttacksOne = null
+    this.numOfAttacksTwo = null
+    this.specialDescriptionOne = null
+    this.specialDescriptionTwo = null
     this.emitUpdate()
   },
   emitUpdate() {

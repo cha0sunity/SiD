@@ -76,56 +76,6 @@ export default {
           { title: 'Users', icon: 'mdi-account-group-outline' },
         ],
         rail: true,
-    //     placeholderMonsters: [
-    //       {
-    //         enemyName: "goblin",
-    //         description: "A short, hairless humanoid with green skin and pointy ears.",
-    //         AC: 11,
-    //         HP: 15,
-    //         ATK:{
-    //             weapon: "club",
-    //             attackBonus: 0,
-    //             numberOfAttacks: 2,
-    //             range: "close",
-    //             numberOfDamageDice: 1,
-    //             damageDiceSize: 4
-    //           },
-    //         MV: "near",
-    //         Strength: 0,
-    //         Dextrity: 1,
-    //         Constitution: 1,
-    //         Intelligence: -1,
-    //         Wisdom: -1,
-    //         Charism: -2,
-    //         Alignment: "chaotic",
-    //         LV: 1,
-    //         Special: "Keen Senses. Can't be surprised."
-    //   },
-    //   {
-    //     enemyName: "kobold",
-    //         description: "A short, lizard thing.",
-    //         AC: 10,
-    //         HP: 12,
-    //         ATK:{
-    //             weapon: "teeth",
-    //             attackBonus: 1,
-    //             numberOfAttacks: 6,
-    //             range: "close",
-    //             numberOfDamageDice: 10,
-    //             damageDiceSize: 10
-    //           },
-    //         MV: "near",
-    //         Strength: 1,
-    //         Dextrity: 2,
-    //         Constitution: -1,
-    //         Intelligence: -2,
-    //         Wisdom: 8,
-    //         Charism: -9,
-    //         Alignment: "chaotic",
-    //         LV: 1,
-    //         Special: "Bites alot"
-    //   }
-    // ],
     cardsToBuild: []
     }
   },

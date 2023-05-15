@@ -121,21 +121,33 @@
 
           <div class="rollResults">
             <div class="showRolls">
-              <div>
+              <div class="rollArea">
                 Attack / Check
               </div>
               <div v-if="twentyRollResult != null || damageRollResult != null">
-                {{ twentyRollResult }}
+                <div v-show="!diceOne">
+                  {{ twentyRollResult }}
+                </div>
+                <div v-show="diceOne">
+                  -
+                </div>
+                
               </div>
               
             </div>
             <v-divider class="border-opacity-100" vertical ></v-divider>
             <div class="showRolls" >
-              <div>
+              <div class="rollArea">
                 Damage
               </div>
               <div v-if="twentyRollResult != null || damageRollResult != null">
-                {{ damageRollResult }}
+                <div v-show="!diceTwo">
+                  {{ damageRollResult }}
+                </div>
+                <div v-show="diceTwo">
+                  -
+                </div>
+                
               </div>
             </div>
         </div>
@@ -153,7 +165,9 @@ export default {
   data() {
     return {
       twentyRollResult: null,
-      damageRollResult: null
+      damageRollResult: null,
+      diceOne: false,
+      diceTwo: false
       }
     },
     components: {
@@ -179,12 +193,21 @@ export default {
            return postMod
         },
           twentyRoll(numberOfDice, sidesOfDice, mod) {
-            let twentyRollNum = this.diceRoller(numberOfDice, sidesOfDice, mod)
-            this.twentyRollResult = twentyRollNum
+            this.diceOne = true
+            setTimeout(() => {
+              let twentyRollNum = this.diceRoller(numberOfDice, sidesOfDice, mod)
+              this.twentyRollResult = twentyRollNum
+              this.diceOne = false
+            }, 250)
           },
           damageRoll(numberOfDice, sidesOfDice, mod) {
-            let damageRollNum = this.diceRoller(numberOfDice, sidesOfDice, mod)
-            this.damageRollResult = damageRollNum
+            this.diceTwo = true
+            setTimeout(() => {
+              let damageRollNum = this.diceRoller(numberOfDice, sidesOfDice, mod)
+              this.damageRollResult = damageRollNum
+              this.diceTwo = false
+            }, 250)
+            
           }
     }
 
@@ -192,121 +215,136 @@ export default {
 </script>
 
 <style>
-.atk:hover {
-  background-color: black;
-  color: white;
-  border-radius: 10px;
-  cursor: default;
-}
-.des {
-  display: flex;
-  flex-wrap: wrap;
-  padding-bottom: 6px;
-}
-.mCard {
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    box-shadow: 0px 0px 10px 2px black inset;
-}
-.mCardTitle {
-    color: white;
-    text-align: center;
-    border-radius: 5px;
-    background-image: url('../assets/card-name-background.PNG');
-}
-.mDescription {
-  overflow-wrap: break-word;
-  
-}
-.statsArea {
-  display: flex;
-  flex-direction: column;
-}
-
-.statsRow {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding-bottom: 5px;
-  border-bottom: 2px solid gray;
-
-}
-
-.abilityRow {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding-bottom: 5px;
-  border-bottom: 2px solid gray;
-}
-
-.attackRow {
-  display: flex;
-  flex-direction: row;
-  padding-bottom: 5px;
-}
-
-.stats {
-  flex-direction: column;
-  padding: 0px 10px 0px 10px;
-  justify-items: center;
-  border: 3px solid transparent;
-}
-
-
-
-.stat {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .abilities {
-  flex-direction: column;
-  padding: 0px 10px 0px 10px;
-  justify-items: center;
-  border: 3px solid transparent;
+flex-direction: column;
+padding: 0px 10px 0px 10px;
+justify-items: center;
+border: 3px solid transparent;
 }
 
 .abilities:hover {
-  background-color: black;
-  color: white;
-  border-radius: 10px;
-  cursor: default;
+background-color: black;
+color: white;
+border-radius: 10px;
+cursor: default;
 }
 
 .ability {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-left: 1.5px;
-  padding-right: 1.5px;
+display: flex;
+align-items: center;
+justify-content: center;
+padding-left: 1.5px;
+padding-right: 1.5px;
 }
 
-.rollResults {
-  display: flex;
-  border-top: 2px solid gray;
-  align-items: center;
-  justify-content: center;
-  height: 90px;
-
+.abilityRow {
+display: flex;
+flex-direction: row;
+justify-content: center;
+padding-bottom: 5px;
+border-bottom: 2px solid gray;
 }
 
-.showRolls {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0px 35px 0px 35px;
-  
+.atk:hover {
+background-color: black;
+color: white;
+border-radius: 10px;
+cursor: default;
+}
+
+.attackRow {
+display: flex;
+flex-direction: row;
+padding-bottom: 5px;
 }
 
 .cardB {
-  font-size: large;
+font-size: large;
+}
+
+.des {
+display: flex;
+flex-wrap: wrap;
+padding-bottom: 6px;
+}
+
+.mCard {
+display: flex;
+flex-direction: column;
+width: 400px;
+box-shadow: 0px 0px 10px 2px black inset;
+}
+
+.mCardTitle {
+color: white;
+text-align: center;
+border-radius: 5px;
+background-image: url('../assets/card-name-background.PNG');
+}
+
+.mDescription {
+overflow-wrap: break-word;
+}
+
+.rollArea {
+border-bottom: solid black 1px;
+margin-bottom: 10px;
+}
+
+.rollResults {
+display: flex;
+border-top: 2px solid gray;
+align-items: center;
+justify-content: center;
+height: 90px;
+}
+
+.showRolls {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+margin: 0px 35px 0px 35px;
+}
+
+.stat {
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.stats {
+flex-direction: column;
+padding: 0px 10px 0px 10px;
+justify-items: center;
+border: 3px solid transparent;
+}
+
+.statsArea {
+display: flex;
+flex-direction: column;
+}
+
+.statsRow {
+display: flex;
+flex-direction: row;
+justify-content: center;
+padding-bottom: 5px;
+border-bottom: 2px solid gray;
 }
 
 h2 {
-  font-size: xx-large;
+font-size: xx-large;
 }
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+
 </style>
