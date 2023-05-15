@@ -202,15 +202,15 @@
               </div>
               <div>
                     <v-btn prepend-icon="mdi-plus" @click="toggleSpecial">Special</v-btn>
-                    <v-text-field label="Special Name" class="largeInputStyle" v-model="specialNameOne"></v-text-field>
-                    <v-text-field label="Special Description" class="largeInputStyle" v-model="specialDescriptionOne"></v-text-field>
+                    <v-text-field label="Special Name" class="largeInputStyle" v-model="talentNameOne"></v-text-field>
+                    <v-text-field label="Special Description" class="largeInputStyle" v-model="talentDescriptionOne"></v-text-field>
                   </div>
               <div v-if="secondSpecial">
-                    <v-text-field label="Special Name" class="largeInputStyle" v-model="specialNameTwo"></v-text-field>
-                    <v-text-field label="Special Description" class="largeInputStyle" v-model="specialDescriptionTwo"></v-text-field>
+                    <v-text-field label="Special Name" class="largeInputStyle" v-model="talentNameTwo"></v-text-field>
+                    <v-text-field label="Special Description" class="largeInputStyle" v-model="talentDescriptionTwo"></v-text-field>
                   </div>
             </div>
-            <button @click="saveMonster">Save</button>
+            <v-btn @click="saveMonster">Save</v-btn>
           </div>
 
         
@@ -244,10 +244,10 @@ export default {
       numOfAttacksTwo: null,
       numOfDamageDiceTwo: null,
       sizeOfDamageDiceTwo: null,
-      specialNameOne: null,
-      specialDescriptionOne: null,
-      specialNameTwo: null,
-      specialDescriptionTwo: null,
+      talentNameOne: null,
+      talentDescriptionOne: null,
+      talentNameTwo: null,
+      talentDescriptionTwo: null,
       mvType: null,
       mvDistance: null
     }
@@ -294,12 +294,12 @@ export default {
         }
       ],
       Special:[{
-        specialName: this.specialNameOne,
-        specialDescription: this.specialDescriptionOne
+        specialName: this.talentNameOne,
+        specialDescription: this.talentDescriptionOne
       },
       {
-        specialName: this.specialNameTwo,
-        specialDescription: this.specialDescriptionTwo
+        specialName: this.talentNameTwo,
+        specialDescription: this.talentDescriptionTwo
       }]      
     }
     keyName = "SiD-" + this.monsterName;
@@ -326,14 +326,14 @@ export default {
     this.atkBonusTwo = null
     this.numOfDamageDiceTwo = null
     this.sizeOfDamageDiceTwo = null
-    this.specialNameOne = null
-    this.specialNameTwo = null
+    this.talentNameOne = null
+    this.talentNameTwo = null
     this.mvType = null
     this.mvDistance = null
     this.numOfAttacksOne = null
     this.numOfAttacksTwo = null
-    this.specialDescriptionOne = null
-    this.specialDescriptionTwo = null
+    this.talentDescriptionOne = null
+    this.talentDescriptionTwo = null
     this.emitUpdate()
   },
   emitUpdate() {

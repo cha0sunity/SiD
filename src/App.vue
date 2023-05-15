@@ -29,8 +29,9 @@
               <v-list-item prepend-icon="mdi-home-city" title="Monster List" value="Monster List" @click="showMonsterList"></v-list-item>
               <v-list-item prepend-icon="mdi-account" title="Monster Cards" value="Monster Cards" @click="showMonsterArea"></v-list-item>
               <v-list-item prepend-icon="mdi-account-group-outline" title="Create Monster" value="Create Monster" @click="showCreate"></v-list-item>
-              <v-list-item prepend-icon="mdi-account-group-outline" title="Edit Monster List" value="Edit Monster List" ></v-list-item>
-              <v-list-item prepend-icon="mdi-account-group-outline" title="Settings" value="Settings" ></v-list-item>
+              <!-- <v-list-item prepend-icon="mdi-account-group-outline" title="Edit Monster List" value="Edit Monster List" ></v-list-item>
+              <v-list-item prepend-icon="mdi-account-group-outline" title="Settings" value="Settings" ></v-list-item> -->
+              <v-list-item prepend-icon="mdi-account-group-outline" title="Issues" value="Issues" @click="showIssues"></v-list-item>
             </v-list>
           </v-navigation-drawer>
  <!-- main area -->
@@ -42,6 +43,10 @@
               </div>
             </div>
             <Create v-show="createArea" @monsterAdded="updateMonsterList()"/>
+            <div v-show="issuesArea">
+              <Issues />
+            </div>
+            
           </v-main>
 <!-- End main area -->
         </v-layout>
@@ -56,13 +61,15 @@
 import MonsterCards from './components/monsterCards.vue'
 import Drawer from './components/drawer.vue'
 import Create from './components/create.vue'
+import Issues from './components/issues.vue'
 
 export default {
   name: 'App',
   components: { 
     MonsterCards,
     Drawer,
-    Create
+    Create,
+    Issues
      },
     data() {
       return {
@@ -70,11 +77,7 @@ export default {
         monsterList: true,
         monsterArea: false,
         createArea: false,
-        items: [
-          { title: 'Home', icon: 'mdi-home-city' },
-          { title: 'My Account', icon: 'mdi-account' },
-          { title: 'Users', icon: 'mdi-account-group-outline' },
-        ],
+        issuesArea: false,
         rail: true,
     cardsToBuild: []
     }
@@ -87,19 +90,27 @@ export default {
     this.monsterList = true
     this.monsterArea = false
     this.createArea = false
+    this.issuesArea = false
   },
     showMonsterArea() {
     this.monsterList = false
     this.monsterArea = true
     this.createArea = false
+    this.issuesArea = false
   },
     showCreate() {
     this.monsterList = false
     this.monsterArea = false
     this.createArea = true
+    this.issuesArea = false
+  },
+  showIssues() {
+    this.monsterList = false
+    this.monsterArea = false
+    this.createArea = false
+    this.issuesArea = true
   },
     updateMonsterList() {
-    console.log('hi')
     this.$refs.drawer.fetchMonsters()
   }
   },
