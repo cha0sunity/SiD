@@ -35,14 +35,15 @@
             </v-list>
           </v-navigation-drawer>
  <!-- main area -->
-          <v-main style="height: 1000px">
+          <v-main style="height: 1000px" >
             <Drawer ref="drawer" v-show="monsterList" @buildCards="addToCardsToBuild" @checkBoxesSelected="addToCardsToBuild" />
             <div v-show="monsterArea" class="monsterArea">
               <div v-for="card in cardsToBuild" :key="card">
                 <MonsterCards :monster="card" />
               </div>
             </div>
-            <Create v-show="createArea" @monsterAdded="updateMonsterList()"/>
+            <!-- <Create v-show="createArea" @monsterAdded="updateMonsterList()"/> -->
+            <Create2 v-show="createArea" @monsterAdded="updateMonsterList()"/>
             <div v-show="issuesArea">
               <Issues />
             </div>
@@ -61,6 +62,7 @@
 import MonsterCards from './components/monsterCards.vue'
 import Drawer from './components/drawer.vue'
 import Create from './components/create.vue'
+import Create2 from './components/create2.vue'
 import Issues from './components/issues.vue'
 
 export default {
@@ -69,6 +71,7 @@ export default {
     MonsterCards,
     Drawer,
     Create,
+    Create2,
     Issues
      },
     data() {
@@ -124,6 +127,7 @@ body {
 }
 .monsterArea {
   display: flex;
+  flex-wrap: wrap;
 }
 .siteFont {
   font-family: 'Montserrat', sans-serif;

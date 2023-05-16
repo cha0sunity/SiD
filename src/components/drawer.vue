@@ -1,12 +1,12 @@
 <template>
-
   <div>
-      <div >
-        <h2>Here Be Monsters</h2>
-        <div class="list" v-for="monster in monsterList" :key="monster" item-style="display: flex; align=center">
-            <input type="checkbox" :value="monster" v-model="isChecked" @change="emitChecked">
-              {{ monster.monsterName }}
-        </div>
+    <!-- <img src="../assets/background.PNG" alt="background" class="background" /> -->
+    <h2>Here Be Monsters</h2>
+    <div class="list">
+      <div v-for="monster in sortedMonsterList" :key="monster" item-style="display: flex; align=center">
+        <input type="checkbox" :value="monster" v-model="isChecked" @change="emitChecked">
+        {{ monster.monsterName }}
+      </div>
     </div>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
   // Runs when the component is mounted on the page
   mounted() {
     // Fetches the monsters from local storage
-    this.fetchMonsters()
+    this.fetchMonsters();
   },
   // Data properties used by the component
   data() {
@@ -24,34 +24,48 @@ export default {
       // List of monsters fetched from local storage
       monsterList: [],
       // Array to track the checked state of checkboxes
-      isChecked: []
-    }
+      isChecked: [],
+    };
+  },
+  // Computed property for sorted monsterList
+  computed: {
+    sortedMonsterList() {
+      return this.monsterList.sort((a, b) =>
+        a.monsterName.localeCompare(b.monsterName)
+      );
+    },
   },
   // Methods used by the component
   methods: {
     // Emits an event with the checked state of checkboxes
     emitChecked() {
-      this.$emit('checkBoxesSelected', this.isChecked)
+      this.$emit("checkBoxesSelected", this.isChecked);
     },
 
     fetchMonsters() {
-      this.monsterList = []
+      this.monsterList = [];
 
       Object.keys(localStorage).forEach((key) => {
-        if(key.startsWith("SiD-")){
-          const monster = JSON.parse(localStorage.getItem(key))
-          // const monster = JSON.parse(localStorage.getItem(key))
-          this.monsterList.push(monster)
+        if (key.startsWith("SiD-")) {
+          const monster = JSON.parse(localStorage.getItem(key));
+          this.monsterList.push(monster);
         }
-      })
-    }
-  }
-}
+      });
+    },
+  },
+};
 </script>
+
 
 <style>
 
-/* .drawer {
-    box-shadow: 0px 00px 20px 5px black inset; 
+.list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+/* .background {
+  background-image: url('../assets/background.PNG');
+  position: absolute;
 } */
 </style>

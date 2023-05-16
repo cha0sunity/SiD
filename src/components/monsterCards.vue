@@ -109,7 +109,7 @@
 
           <div class="attackRow" v-for="attack in monster.ATK" :key="attack">
               <div class="attack" v-if="attack.weapon">
-                <span class="atk" @click="twentyRoll(1, 20, attack.atkBonus)">ATK {{ attack.numberOfAttacks }}  {{ attack.weapon }}  + {{ attack.atkBonus }}</span> <span class="atk" @click="damageRoll(attack.numOfDamageDice, attack.sizeOfDamageDice, 0)">({{ attack.numOfDamageDice }}d{{ attack.sizeOfDamageDice }})</span> 
+                <span class="atk" @click="twentyRoll(1, 20, attack.atkBonus)">ATK {{ attack.numberOfAttacks }}  {{ attack.weapon }} {{ attack.atkBonus }}</span> <span class="atk" @click="damageRoll(attack.numOfDamageDice, attack.sizeOfDamageDice, 0)">({{ attack.numOfDamageDice }}d{{ attack.sizeOfDamageDice }})</span> 
               </div>
             </div>
 
@@ -125,8 +125,14 @@
                 Attack / Check
               </div>
               <div v-if="twentyRollResult != null || damageRollResult != null">
-                <div v-show="!diceOne">
+                <div v-show="!diceOne && !crit && !miss">
                   {{ twentyRollResult }}
+                </div>
+                <div v-if="crit === true">
+                  <strong style="color: green">Nat 20!</strong>
+                </div>
+                <div v-if="miss === true">
+                  <strong style="color: goldenrod">Nat 1!</strong>
                 </div>
                 <div v-show="diceOne">
                   -
@@ -147,7 +153,6 @@
                 <div v-show="diceTwo">
                   -
                 </div>
-                
               </div>
             </div>
         </div>
@@ -167,7 +172,9 @@ export default {
       twentyRollResult: null,
       damageRollResult: null,
       diceOne: false,
-      diceTwo: false
+      diceTwo: false,
+      crit: false,
+      miss: false,
       }
     },
     components: {
@@ -188,12 +195,24 @@ export default {
 
               return total
             }
+
           let preMod = Math.floor(Math.random() * Number(sidesOfDice)) + 1
+
+          if (sidesOfDice === 20 && preMod === 20){
+            this.crit = true
+          }
+
+          if (sidesOfDice === 20 && preMod === 1){
+            this.miss = true
+          }
+
           let postMod = Number(preMod) + Number(mod)
            return postMod
         },
           twentyRoll(numberOfDice, sidesOfDice, mod) {
             this.diceOne = true
+            this.crit = false
+            this.miss = false
             setTimeout(() => {
               let twentyRollNum = this.diceRoller(numberOfDice, sidesOfDice, mod)
               this.twentyRollResult = twentyRollNum
