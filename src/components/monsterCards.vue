@@ -129,10 +129,10 @@
                   {{ twentyRollResult }}
                 </div>
                 <div v-if="crit === true">
-                  <strong style="color: green">Nat 20!</strong>
+                  <strong>Nat 20!</strong>
                 </div>
                 <div v-if="miss === true">
-                  <strong style="color: goldenrod">Nat 1!</strong>
+                  <strong>Nat 1!</strong>
                 </div>
                 <div v-show="diceOne">
                   -

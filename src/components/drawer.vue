@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <img src="../assets/background.PNG" alt="background" class="background" /> -->
-    <h2>Here Be Monsters</h2>
+    <h2>Monster List</h2>
     <div class="list">
       <div v-for="monster in sortedMonsterList" :key="monster" item-style="display: flex; align=center">
         <input type="checkbox" :value="monster" v-model="isChecked" @change="emitChecked">

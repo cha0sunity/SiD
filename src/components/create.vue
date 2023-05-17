@@ -1,217 +1,252 @@
 <template>
-      <div class="formArea">
-        <div class="inputCol">
-        <v-text-field label="Monster Name" class="largeInputStyle" v-model="this.monsterName"></v-text-field>
-        <v-text-field label="Description" class="largeInputStyle" v-model="this.description"></v-text-field>
-        <v-select
-              label="Alignment"
-              class="medInputStyle"
-              :items="['Law','Neutral','Chaos']"
-              v-model="this.alignment"
-            ></v-select>
-        <v-select
-              label="Movement Type"
-              class="medInputStyle"
-              :items="['Walk','Fly','Swim','Burrow','Float','Teleport']"
-              v-model="this.mvType"
-            ></v-select>
-        <v-select
-              label="Movement Range"
-              class="medInputStyle"
-              :items="['Close','Near','Near x2','Far']"
-              v-model="this.mvDistance"
-            ></v-select>
-          
-        <div class="inputColRow">
+        <form @submit.prevent="saveMonster" class="formArea">
+          <div class="inputCol">
+            <v-text-field
+              v-model="monsterName"
+              label="Monster Name"
+              required
+              density="compact"
+            ></v-text-field>
+            <v-text-field
+              v-model="description"
+              label="Description"
+              density="compact"
+            ></v-text-field>
+             <v-select
+                label="Alignment"
+                class="medInputStyle"
+                :items="['Law','Neutral','Chaos']"
+                v-model="alignment"
+                density="compact"
+            ></v-select> 
+            <v-select
+                label="Move Type"
+                class="medInputStyle"
+                :items="['Walk','Climb','Fly','Swim','Burrow','Float']"
+                v-model="mvType"
+                density="compact"
+              ></v-select>
+               <v-select
+                label="Move Range"
+                class="medInputStyle"
+                :items="['Close','Near','Near x2','Far']"
+                v-model="mvDistance"
+                density="compact"
+              ></v-select>
+               <div class="inputColRow">
+                <v-select
+                label="AC"
+                class="smallInputStyle"
+                :items="[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"
+                v-model="ac"
 
-            <v-text-field
-          label="AC"
-          type="number"   
-          step="any"
-          min="0"
-          ref="input"
-          class="smallInputStyle"
-          v-model="this.ac"
-            ></v-text-field>
-        <v-text-field
-          label="HP"
-          type="number"   
-          step="any"
-          min="0"
-          ref="input"
-          class="smallInputStyle"
-          v-model="this.hp"
-            ></v-text-field>
-            <v-text-field
-          label="Lvl"
-          type="number"   
-          step="any"
-          min="0"
-          ref="input"
-          class="smallInputStyle"
-          v-model="this.lvl"
-            ></v-text-field>
-          </div>
-          <div class="inputColRow"> 
-        <v-text-field
-          label="Str"
-          type="number"   
-          step="any"
-          min="-5"
-          ref="input"
-          class="smallInputStyle"
-          v-model="this.Str"
-            ></v-text-field>
-        <v-text-field
-          label="Dex"
-          type="number"   
-          step="any"
-          min="-5"
-          ref="input"
-          class="smallInputStyle"
-          v-model="this.Dex"
-            ></v-text-field>
-        <v-text-field
-          label="Con"
-          type="number"   
-          step="any"
-          min="-5"
-          ref="input"
-          class="smallInputStyle"
-          v-model="this.Con"
-            ></v-text-field>
-            <v-text-field
-          label="Int"
-          type="number"   
-          step="any"
-          min="-5"
-          ref="input"
-          class="smallInputStyle"
-          v-model="this.Int"
-            ></v-text-field>
-        <v-text-field
-          label="Wis"
-          type="number"   
-          step="any"
-          min="-5"
-          ref="input"
-          class="smallInputStyle"
-          v-model="this.Wis"
-            ></v-text-field>
-          <v-text-field
-        label="Cha"
-        type="number"   
-        step="any"
-        min="-5"
-        ref="input"
-        class="smallInputStyle"
-        v-model="this.Cha"
-          ></v-text-field>
-        
-          </div>
+            ></v-select> 
+             
+              <v-text-field
+                label="HP"
+                type="number"   
+                step="any"
+                min="0"
+                ref="input"
+                class="smallInputStyle"
+                v-model="hp"
+
+              ></v-text-field>
+
+              <v-select
+                label="Lvl"
+                class="smallInputStyle"
+                :items="[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"
+                v-model="lvl"
+
+            ></v-select>
+
+            </div>
+            <div class="inputColRow" style="margin-top: 15px;"> 
+
+              <v-select
+                label="S"
+                class="smallInputStyle"
+                :items="[-3,-2,-1,0,1,2,3,4,5,6]"
+                v-model="Str"
+                density="compact"
+            ></v-select>
+
+            <v-select
+                label="D"
+                class="smallInputStyle"
+                :items="[-3,-2,-1,0,1,2,3,4,5,6]"
+                v-model="Dex"
+                density="compact"
+            ></v-select>
+
+            <v-select
+                label="C"
+                class="smallInputStyle"
+                :items="[-3,-2,-1,0,1,2,3,4,5,6]"
+                v-model="Con"
+                density="compact"
+            ></v-select>
+
+            <v-select
+                label="I"
+                class="smallInputStyle"
+                :items="[-3,-2,-1,0,1,2,3,4,5,6]"
+                v-model="Int"
+                density="compact"
+            ></v-select>
+
+            <v-select
+                label="W"
+                class="smallInputStyle"
+                :items="[-3,-2,-1,0,1,2,3,4,5,6]"
+                v-model="Wis"
+                density="compact"
+            ></v-select>
+
+            <v-select
+                label="Ch"
+                class="smallInputStyle"
+                :items="[-3,-2,-1,0,1,2,3,4,5,6]"
+                v-model="Cha"
+                density="compact"
+            ></v-select>
+
+            </div>
+          <v-btn type="submit" block class="mt-2">Save</v-btn>
         </div>
-
+        <!-- column 2 -->
         <div class="inputCol">
           <div>
-            <v-btn prepend-icon="mdi-plus" @click="toggleAttack">Attack</v-btn>
           <div class="inputColRow">
 
           <div class="multiForm">
-              <v-text-field label="Weapon" class="medInputStyle" v-model="this.weaponOne"></v-text-field>
-              <v-text-field
-                  label="Attack Bonus"
-                  type="number"   
-                  step="any"
-                  min="-5"
-                  ref="input"
-                  class="medInputStyle"
-                  v-model="this.atkBonusOne"
-              ></v-text-field>
-              <v-text-field
-                  label="Number of Attacks"
-                  type="number"   
-                  step="any"
-                  min="1"
-                  ref="input"
-                  class="medInputStyle"
-                  v-model="this.numOfAttacksOne"
-              ></v-text-field>
-              <v-text-field
-                  label="Number of Damage Dice"
-                  type="number"   
-                  step="any"
-                  min="1"
-                  ref="input"
-                  class="medInputStyle"
-                  v-model="this.numOfDamageDiceOne"
-              ></v-text-field>
-              <v-text-field
-                  label="Size of Damage Dice"
-                  type="number"   
-                  step="2"
-                  min="4"
-                  max="12"
-                  ref="input"
-                  class="medInputStyle"
-                  v-model="this.sizeOfDamageDiceOne"
-              ></v-text-field>
+              <v-text-field label="Attack 1" class="medInputStyle" v-model="weaponOne" density="compact"></v-text-field>
+              <!-- <v-select
+                label="Range"
+                class="medInputStyle"
+                :items="['Close','Near','Far']"
+                v-model="this.rangeOne"
+                :rules="[rules.required]"
+            ></v-select> -->
+              <v-select
+                label="Attack Bonus"
+                class="medInputStyle"
+                :items="[-2,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"
+                v-model="atkBonusOne"
+                density="compact"
+            ></v-select>
+              <v-select
+                label="# of Attacks"
+                class="medInputStyle"
+                :items="[0,1,2,3,4,5]"
+                v-model="numOfAttacksOne"
+                density="compact"
+            ></v-select>
+              <v-select
+                label="# of Dice"
+                class="medInputStyle"
+                :items="[0,1,2,3,4,5,6,7,8,9,10]"
+                v-model="numOfDamageDiceOne" 
+                density="compact"
+            ></v-select>
+              <v-select
+                label="Dice Size"
+                class="medInputStyle"
+                :items="[4,6,8,10,12]"
+                v-model="sizeOfDamageDiceOne"  
+                density="compact"
+            ></v-select>
+
               </div>
 
-             <div class="multiForm" v-if="secondAttack">
-              <v-text-field label="Weapon" class="medInputStyle" v-model="this.weaponTwo"></v-text-field>
-              <v-text-field
-                  label="Attack Bonus"
-                  type="number"   
-                  step="any"
-                  min="-5"
-                  ref="input"
-                  class="medInputStyle"
-                  v-model="this.atkBonusTwo"
-              ></v-text-field>
-              <v-text-field
-                  label="Number of Attacks"
-                  type="number"   
-                  step="any"
-                  min="1"
-                  ref="input"
-                  class="medInputStyle"
-                  v-model="this.numOfAttacksTwo"
-              ></v-text-field>
-              <v-text-field
-            label="Number of Damage Dice"
-            type="number"   
-            step="any"
-            min="1"
-            ref="input"
-            class="medInputStyle"
-            v-model="this.numOfDamageDiceTwo"
-        ></v-text-field>
-              
-              <v-text-field
-                  label="Size of Damage Dice"
-                  type="number"   
-                  step="2"
-                  min="4"
-                  max="12"
-                  ref="input"
-                  class="medInputStyle"
-                  v-model="this.sizeOfDamageDiceTwo"
-              ></v-text-field>
+             <div class="multiForm" >
+              <v-text-field label="Attack 2" class="medInputStyle" v-model="weaponTwo" density="compact"></v-text-field>
+              <!-- <v-select
+                label="Range"
+                class="medInputStyle"
+                :items="['Close','Near','Far']"
+                v-model="this.rangeTwo"
+                :rules="[rules.required]"
+            ></v-select> -->
+              <v-select
+                label="Attack Bonus"
+                class="medInputStyle"
+                :items="[-2,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"
+                v-model="atkBonusTwo"
+                density="compact"
+            ></v-select>
+              <v-select
+                label="# of Attacks"
+                class="medInputStyle"
+                :items="[0,1,2,3,4,5]"
+                v-model="numOfAttacksTwo"
+                density="compact"
+            ></v-select>
+              <v-select
+                label="# of Dice"
+                class="medInputStyle"
+                :items="[0,1,2,3,4,5,6,7,8,9,10]"
+                v-model="numOfDamageDiceTwo"
+                density="compact"
+            ></v-select>
+              <v-select
+                label="Dice Size"
+                class="medInputStyle"
+                :items="[4,6,8,10,12]"
+                v-model="sizeOfDamageDiceTwo"
+                density="compact"
+            ></v-select>
+                  </div>
+
+             <div class="multiForm" >
+              <v-text-field label="Attack 3" class="medInputStyle" v-model="weaponThree" density="compact"></v-text-field>
+
+              <v-select
+                label="Attack Bonus"
+                class="medInputStyle"
+                :items="[-2,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"
+                v-model="atkBonusThree"
+                density="compact"
+            ></v-select>
+              <v-select
+                label="# of Attacks"
+                class="medInputStyle"
+                :items="[0,1,2,3,4,5]"
+                v-model="numOfAttacksThree"
+                density="compact"
+            ></v-select>
+              <v-select
+                label="# of Dice"
+                class="medInputStyle"
+                :items="[0,1,2,3,4,5,6,7,8,9,10]"
+                v-model="numOfDamageDiceThree"
+                density="compact"
+            ></v-select>
+              <v-select
+                label="Dice Size"
+                class="medInputStyle"
+                :items="[4,6,8,10,12]"
+                v-model="sizeOfDamageDiceThree"
+                density="compact"
+            ></v-select>
                   </div>
                 </div>
               </div>
               <div>
-                    <v-btn prepend-icon="mdi-plus" @click="toggleSpecial">Special</v-btn>
-                    <v-text-field label="Special Name" class="largeInputStyle" v-model="talentNameOne"></v-text-field>
-                    <v-text-field label="Special Description" class="largeInputStyle" v-model="talentDescriptionOne"></v-text-field>
+                    <v-text-field label="Talent 1" class="largeInputStyle" v-model="talentNameOne" density="compact"></v-text-field>
+                    <v-text-field label="Description" class="largeInputStyle" v-model="talentDescriptionOne" density="compact"></v-text-field>
                   </div>
-              <div v-if="secondSpecial">
-                    <v-text-field label="Special Name" class="largeInputStyle" v-model="talentNameTwo"></v-text-field>
-                    <v-text-field label="Special Description" class="largeInputStyle" v-model="talentDescriptionTwo"></v-text-field>
+              <div>
+                    <v-text-field label="Talent 2" class="largeInputStyle" v-model="talentNameTwo" density="compact"></v-text-field>
+                    <v-text-field label="Description" class="largeInputStyle" v-model="talentDescriptionTwo" density="compact"></v-text-field>
+                  </div>
+              <div>
+                    <v-text-field label="Talent 3" class="largeInputStyle" v-model="talentNameThree" density="compact"></v-text-field>
+                    <v-text-field label="Description" class="largeInputStyle" v-model="talentDescriptionThree" density="compact"></v-text-field>
                   </div>
             </div>
-            <v-btn @click="saveMonster">Save</v-btn>
-          </div>
+          </form>
 
         
 </template>
@@ -244,12 +279,40 @@ export default {
       numOfAttacksTwo: null,
       numOfDamageDiceTwo: null,
       sizeOfDamageDiceTwo: null,
+      weaponThree: null,
+      atkBonusThree: null,
+      numOfAttacksThree: null,
+      numOfDamageDiceThree: null,
+      sizeOfDamageDiceThree: null,
       talentNameOne: null,
       talentDescriptionOne: null,
       talentNameTwo: null,
       talentDescriptionTwo: null,
+      talentNameThree: null,
+      talentDescriptionThree: null,
       mvType: null,
-      mvDistance: null
+      mvDistance: null,
+      // rules: {
+      //   required: [v => !!v || 'Selection is required.']
+      // },
+      // textBlank: [
+      //   value => {
+      //     if (value) return true
+
+      //     return 'Nat 1'
+      //   }
+      // ],
+      // testNum: [
+      //   value => {
+      //     if (value) return true
+
+      //     if (typeof(value) !== Number){
+      //       return "Please enter a number"
+      //     }
+
+          
+      //   }
+      // ]
     }
   },
   methods: {
@@ -260,6 +323,7 @@ export default {
       this.secondSpecial = !this.secondSpecial
     },
     saveMonster() {
+
       let keyName;
       const monster = {
       monsterName: this.monsterName,
@@ -280,6 +344,7 @@ export default {
       Cha: this.Cha,
       ATK: [{
         weapon: this.weaponOne,
+        // range: this.rangeOne,
         numberOfAttacks: this.numOfAttacksOne,
         atkBonus: this.atkBonusOne,
         numOfDamageDice: this.numOfDamageDiceOne,
@@ -287,10 +352,19 @@ export default {
       },
         {
           weapon: this.weaponTwo,
+          // range: this.rangeTwo,
           numberOfAttacks: this.numOfAttacksTwo,
           atkBonus: this.atkBonusTwo,
           numOfDamageDice: this.numOfDamageDiceTwo,
-          sizeofDamageDice: this.sizeOfDamageDiceTwo,
+          sizeOfDamageDice: this.sizeOfDamageDiceTwo,
+        },
+        {
+          weapon: this.weaponThree,
+          // range: this.rangeTwo,
+          numberOfAttacks: this.numOfAttacksThree,
+          atkBonus: this.atkBonusThree,
+          numOfDamageDice: this.numOfDamageDiceThree,
+          sizeOfDamageDice: this.sizeOfDamageDiceThree,
         }
       ],
       Special:[{
@@ -300,7 +374,12 @@ export default {
       {
         specialName: this.talentNameTwo,
         specialDescription: this.talentDescriptionTwo
-      }]      
+      },
+      {
+        specialName: this.talentNameThree,
+        specialDescription: this.talentDescriptionThree
+      }]
+          
     }
     keyName = "SiD-" + this.monsterName;
     localStorage.setItem(keyName, JSON.stringify(monster));
@@ -326,14 +405,23 @@ export default {
     this.atkBonusTwo = null
     this.numOfDamageDiceTwo = null
     this.sizeOfDamageDiceTwo = null
+    this.weaponThree = null
+    this.atkBonusThree = null
+    this.numOfDamageDiceThree = null
+    this.sizeOfDamageDiceThree = null
     this.talentNameOne = null
-    this.talentNameTwo = null
+    this.talentNameTwo = null 
+    this.talentNameThree = null 
     this.mvType = null
     this.mvDistance = null
     this.numOfAttacksOne = null
     this.numOfAttacksTwo = null
+    this.numOfAttacksThree = null
     this.talentDescriptionOne = null
     this.talentDescriptionTwo = null
+    this.talentDescriptionThree = null
+    // this.rangeOne = null
+    // this.rangeTwo = null
     this.emitUpdate()
   },
   emitUpdate() {
@@ -360,8 +448,8 @@ export default {
 .inputCol {
   display: flex;
   flex-direction: column;
-  width: 540px;
-  margin-right: 20px;
+  width: 500px;
+  margin-right: 10px;
 }
 .inputColRow {
   display: flex;
@@ -369,13 +457,14 @@ export default {
 }
 
 .smallInputStyle {
-  width: 75px;
-  height: 75px;
+  width: 50px;
+  height: 50px;
 }
 .medInputStyle {
-  width: 250px;
+  width: 175px;
 }
 .largeInputStyle {
-  width: 450px;
+  width: 500px;
 }
+
 </style>

@@ -7,43 +7,44 @@
             v-model="drawer"
             :rail="rail"
             permanent
-            @click="rail = false"
+            
           >
             <v-list-item
-              prepend-icon="mdi-fencing"
+              prepend-icon="fa-solid fa-dungeon"
               title="Shadows in the Dark"
               nav
             >
-              <template v-slot:append>
+              <!-- <template v-slot:append>
                 <v-btn
                   variant="text"
-                  icon="mdi-chevron-left"
+                  icon="fa-solid fa-chevron-left"
                   @click.stop="rail = !rail"
                 ></v-btn>
-              </template>
+              </template> -->
             </v-list-item>
 
             <v-divider></v-divider>
 
             <v-list density="compact" nav>
-              <v-list-item prepend-icon="mdi-home-city" title="Monster List" value="Monster List" @click="showMonsterList"></v-list-item>
-              <v-list-item prepend-icon="mdi-account" title="Monster Cards" value="Monster Cards" @click="showMonsterArea"></v-list-item>
-              <v-list-item prepend-icon="mdi-account-group-outline" title="Create Monster" value="Create Monster" @click="showCreate"></v-list-item>
+              <v-list-item prepend-icon="fa-solid fa-scroll" title="Monster List" value="Monster List" @click="showMonsterList"></v-list-item>
+              <v-list-item prepend-icon="fa-solid fa-dragon" title="Monster Cards" value="Monster Cards" @click="showMonsterArea"></v-list-item>
+              <v-list-item prepend-icon="fa-solid fa-dice-d6" title="Create Monster" value="Create Monster" @click="showCreate"></v-list-item>
               <!-- <v-list-item prepend-icon="mdi-account-group-outline" title="Edit Monster List" value="Edit Monster List" ></v-list-item>
               <v-list-item prepend-icon="mdi-account-group-outline" title="Settings" value="Settings" ></v-list-item> -->
-              <v-list-item prepend-icon="mdi-account-group-outline" title="Issues" value="Issues" @click="showIssues"></v-list-item>
+              <v-list-item prepend-icon="fa-solid fa-book-skull" title="Issues" value="Issues" @click="showIssues"></v-list-item>
             </v-list>
           </v-navigation-drawer>
  <!-- main area -->
-          <v-main style="height: 1000px" >
+          <v-main class="main" >
             <Drawer ref="drawer" v-show="monsterList" @buildCards="addToCardsToBuild" @checkBoxesSelected="addToCardsToBuild" />
             <div v-show="monsterArea" class="monsterArea">
+              <h2>Here Be Monsters</h2>
               <div v-for="card in cardsToBuild" :key="card">
                 <MonsterCards :monster="card" />
               </div>
             </div>
             <!-- <Create v-show="createArea" @monsterAdded="updateMonsterList()"/> -->
-            <Create2 v-show="createArea" @monsterAdded="updateMonsterList()"/>
+            <Create v-show="createArea" @monsterAdded="updateMonsterList()"/>
             <div v-show="issuesArea">
               <Issues />
             </div>
@@ -62,7 +63,6 @@
 import MonsterCards from './components/monsterCards.vue'
 import Drawer from './components/drawer.vue'
 import Create from './components/create.vue'
-import Create2 from './components/create2.vue'
 import Issues from './components/issues.vue'
 
 export default {
@@ -71,16 +71,15 @@ export default {
     MonsterCards,
     Drawer,
     Create,
-    Create2,
     Issues
      },
     data() {
       return {
         drawer: true,
-        monsterList: true,
+        monsterList: false,
         monsterArea: false,
         createArea: false,
-        issuesArea: false,
+        issuesArea: true,
         rail: true,
     cardsToBuild: []
     }
@@ -124,10 +123,16 @@ export default {
 <style>
 body {
   background-color: white;
+  position: relative;
+}
+
+
+.main {
+  height: 880px;  
 }
 .monsterArea {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; 
 }
 .siteFont {
   font-family: 'Montserrat', sans-serif;
