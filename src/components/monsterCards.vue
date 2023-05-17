@@ -1,4 +1,5 @@
 <template>
+  <div class="wrap">
   <v-card>
       <div class="mCard">
       <v-card-item>
@@ -161,7 +162,7 @@
       </div>
       
   </v-card>
-  
+  </div>  
 </template>
 
 <script>
@@ -234,6 +235,10 @@ export default {
 </script>
 
 <style>
+.wrap {
+  width: 100%;
+  height: 100%;
+}
 .abilities {
 flex-direction: column;
 padding: 0px 10px 0px 10px;

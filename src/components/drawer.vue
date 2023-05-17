@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
     <!-- <img src="../assets/background.PNG" alt="background" class="background" /> -->
     <h2>Monster List</h2>
     <div class="list">

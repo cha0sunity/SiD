@@ -1,18 +1,21 @@
 <template>
-  <v-app class="siteFont">
-    <v-main>
-      <v-card>
-        <v-layout>
+  <div class="wrap">
+  <v-app class="siteFont" style="height: 100%;">
+    <v-main style="height: 100%;">
+      <v-card style="height: 100%;">
+        <v-layout style="height: 100%;">
           <v-navigation-drawer
             v-model="drawer"
             :rail="rail"
             permanent
+            style="height: 100%;"
             
           >
             <v-list-item
               prepend-icon="fa-solid fa-dungeon"
               title="Shadows in the Dark"
               nav
+              
             >
               <!-- <template v-slot:append>
                 <v-btn
@@ -25,7 +28,7 @@
 
             <v-divider></v-divider>
 
-            <v-list density="compact" nav>
+            <v-list density="compact" nav >
               <v-list-item prepend-icon="fa-solid fa-scroll" title="Monster List" value="Monster List" @click="showMonsterList"></v-list-item>
               <v-list-item prepend-icon="fa-solid fa-dragon" title="Monster Cards" value="Monster Cards" @click="showMonsterArea"></v-list-item>
               <v-list-item prepend-icon="fa-solid fa-dice-d6" title="Create Monster" value="Create Monster" @click="showCreate"></v-list-item>
@@ -35,7 +38,7 @@
             </v-list>
           </v-navigation-drawer>
  <!-- main area -->
-          <v-main class="main" >
+          <v-main style="height: 100%;" >
             <Drawer ref="drawer" v-show="monsterList" @buildCards="addToCardsToBuild" @checkBoxesSelected="addToCardsToBuild" />
             <div v-show="monsterArea" >
               <h2>Here Be Monsters</h2>
@@ -58,6 +61,7 @@
       </v-card> 
     </v-main>
   </v-app>
+  </div>
 </template>
 
 <script>
@@ -130,7 +134,7 @@ body {
 
 
 .main {
-  height: 1000px;  
+  height: 100%;  
 }
 .monsterArea {
   display: flex;
