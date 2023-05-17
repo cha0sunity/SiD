@@ -37,11 +37,14 @@
  <!-- main area -->
           <v-main class="main" >
             <Drawer ref="drawer" v-show="monsterList" @buildCards="addToCardsToBuild" @checkBoxesSelected="addToCardsToBuild" />
-            <div v-show="monsterArea" class="monsterArea">
+            <div v-show="monsterArea" >
               <h2>Here Be Monsters</h2>
-              <div v-for="card in cardsToBuild" :key="card">
+              <div class="monsterArea">
+                <div v-for="card in cardsToBuild" :key="card">
                 <MonsterCards :monster="card" />
               </div>
+              </div>
+
             </div>
             <!-- <Create v-show="createArea" @monsterAdded="updateMonsterList()"/> -->
             <Create v-show="createArea" @monsterAdded="updateMonsterList()"/>
@@ -123,7 +126,6 @@ export default {
 <style>
 body {
   background-color: white;
-  position: relative;
 }
 
 
@@ -132,7 +134,7 @@ body {
 }
 .monsterArea {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 }
 .siteFont {
   font-family: 'Montserrat', sans-serif;
