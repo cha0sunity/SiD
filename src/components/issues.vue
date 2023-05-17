@@ -1,5 +1,6 @@
 <template>
-  <img src="../assets/background.PNG" alt="title">
+  <h1>Shadows in the Dark</h1>
+  <br>
   <h3>What is Shadows in the Dark?</h3>
   <p>Shadows in the Dark is my attempt and building a simple interface for GMs to run encounters. The monster cards that are created have a dice roller built into them so
     if a creature has a Str score of 1, clicking that part of the card will roll 1d20+1 and show the results at the bottom. The same applies to attacks. Damage rolls will

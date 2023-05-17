@@ -128,7 +128,7 @@ body {
 
 
 .main {
-  height: 880px;  
+  height: 1000px;  
 }
 .monsterArea {
   display: flex;
@@ -140,7 +140,7 @@ body {
 .specialFont {
   font-family: 'IM Fell English SC', serif;
 }
-h2 {
+h1,h2,h3 {
   font-family: 'IM Fell English SC', serif;
 }
 
