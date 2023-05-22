@@ -192,7 +192,7 @@ export default {
     description: "A cave hominid with scraggly fur and a stone-tipped spear.",
     alignment: "Chaos",
     ac: 12,
-    hp: 35,
+    hp: 5,
     Mv:{
       type: "walk",
       distance: "near"
