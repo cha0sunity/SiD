@@ -80,6 +80,9 @@ export default {
     Create,
     Issues
      },
+     beforeMounted() {
+      preMonster()
+     },
     data() {
       return {
         drawer: true,
@@ -149,6 +152,7 @@ body {
 h1,h2,h3 {
   font-family: 'IM Fell English SC', serif;
 }
+
 
 
 </style>
