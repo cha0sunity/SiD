@@ -3,7 +3,7 @@
   <h1>Shadows in the Dark</h1>
   <br>
   <h2>What is Shadows in the Dark?</h2>
-  <p>Shadows in the Dark is a simple interface for GMs to run encounters. The monster cards that are created have a dice roller built into them so
+  <p>Shadows in the Dark is a fan-made project. It is a simple interface for GMs to run encounters in Shadowdark. The monster cards that are created have a dice roller built into them so
     if a creature has a Str score of 1, clicking that part of the card will roll 1d20+1 and show the results at the bottom. The same applies to attacks. Damage rolls will
     use the dice for the damage that were chosen in the monster builder screen.
   </p>
@@ -47,7 +47,7 @@
   
   <p>tool tips</p>
   <p>settings for alternate crit rules and dark mode</p>
-  <p>UI fixes and better icons</p>
+  <p>UI fixes</p>
 </div>
   <!-- <h2>Maybe features</h2>
   <p>detect with a dice roll is added to a monster talent and create a clickable trigger for it to roll the dice</p>
