@@ -161,6 +161,13 @@
               </div>
 
              <div class="multiForm" >
+              <v-select
+                label="And-Or"
+                class="medInputStyle"
+                :items="['and','or']"
+                v-model="weaponTwoAndOr"
+                density="compact"
+            ></v-select>
               <v-text-field label="Attack 2" class="medInputStyle" v-model="weaponTwo" density="compact"></v-text-field>
               <!-- <v-select
                 label="Range"
@@ -200,6 +207,13 @@
                   </div>
 
              <div class="multiForm" >
+              <v-select
+                label="And-Or"
+                class="medInputStyle"
+                :items="['and','or']"
+                v-model="weaponThreeAndOr"
+                density="compact"
+            ></v-select>
               <v-text-field label="Attack 3" class="medInputStyle" v-model="weaponThree" density="compact"></v-text-field>
 
               <v-select
@@ -275,11 +289,13 @@ export default {
       numOfDamageDiceOne: null,
       sizeOfDamageDiceOne: null,
       weaponTwo: null,
+      weaponTwoAndOr: null,
       atkBonusTwo: null,
       numOfAttacksTwo: null,
       numOfDamageDiceTwo: null,
       sizeOfDamageDiceTwo: null,
       weaponThree: null,
+      weaponThreeAndOr: null,
       atkBonusThree: null,
       numOfAttacksThree: null,
       numOfDamageDiceThree: null,
@@ -351,6 +367,7 @@ export default {
         sizeOfDamageDice: this.sizeOfDamageDiceOne,
       },
         {
+          aO: this.weaponTwoAndOr,
           weapon: this.weaponTwo,
           // range: this.rangeTwo,
           numberOfAttacks: this.numOfAttacksTwo,
@@ -359,6 +376,7 @@ export default {
           sizeOfDamageDice: this.sizeOfDamageDiceTwo,
         },
         {
+          aO: this.weaponThreeAndOr,
           weapon: this.weaponThree,
           // range: this.rangeTwo,
           numberOfAttacks: this.numOfAttacksThree,
@@ -402,10 +420,12 @@ export default {
     this.numOfDamageDiceOne = null
     this.sizeOfDamageDiceOne = null
     this.weaponTwo = null
+    this.weaponTwoAndOr = null
     this.atkBonusTwo = null
     this.numOfDamageDiceTwo = null
     this.sizeOfDamageDiceTwo = null
     this.weaponThree = null
+    this.weaponThreeAndOr = null
     this.atkBonusThree = null
     this.numOfDamageDiceThree = null
     this.sizeOfDamageDiceThree = null

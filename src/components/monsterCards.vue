@@ -110,7 +110,7 @@
 
           <div class="attackRow" v-for="attack in monster.ATK" :key="attack">
               <div class="attack" v-if="attack.weapon">
-                <span class="atk" @click="twentyRoll(1, 20, attack.atkBonus)">ATK {{ attack.numberOfAttacks }}  {{ attack.weapon }} {{ attack.atkBonus }}</span> <span class="atk" @click="damageRoll(attack.numOfDamageDice, attack.sizeOfDamageDice, 0)">({{ attack.numOfDamageDice }}d{{ attack.sizeOfDamageDice }})</span> 
+                <span v-if="attack.aO">- {{ attack.aO }} - </span><span class="atk" @click="twentyRoll(1, 20, attack.atkBonus)">ATK {{ attack.numberOfAttacks }}  {{ attack.weapon }} {{ attack.atkBonus }}</span> <span class="atk" @click="damageRoll(attack.numOfDamageDice, attack.sizeOfDamageDice, 0)">({{ attack.numOfDamageDice }}d{{ attack.sizeOfDamageDice }})</span> 
               </div>
             </div>
 
